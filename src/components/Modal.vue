@@ -1,8 +1,12 @@
 <template>
     <div class="backdrop">
         <div class="modal" :class= "{sale: theme === 'sale'}">
-            <h1> {{ header }}</h1>
-            <p>{{ text }}</p>
+            <!-- <h1> {{ header }}</h1>
+            <p>{{ text }}</p> -->
+            <slot></slot>
+            <div class="actions">
+                <slot name="links"></slot>
+            </div>
         </div>
     </div>
 </template>
@@ -10,7 +14,7 @@
 <script>
 export default {
   name: 'Modal',
-  props: ['header', 'text', 'theme']
+  props: ['theme']
 }
 </script>
 

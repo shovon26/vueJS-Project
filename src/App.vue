@@ -1,10 +1,30 @@
 <template>
   <h1>{{title}}</h1>
-  <div v-if="showModal">
-    <Modal :header="header" :text="text" theme="sale" @click="toggleModal"/>
-  </div>
+  <teleport to=".modals" v-if="showModal">
+    <Modal theme="sale" @click="toggleModal">
+      <template v-slot:links>
+        <a href="#">Sign up</a>
+        <a href="#">learn more</a>
+      </template>
+      <h1>Vini is the best dribler</h1>
+      <p>grab your pizza just time!</p> 
+    </Modal>
+  </teleport>
+  <!-- Reuse component modal -->
+  <teleport to=".modals" v-if="showModal2">
+    <Modal theme="sale" @click="toggleModal2">
+      <template v-slot:links>
+        <a href="#">Sign up</a>
+        <a href="#">learn more</a>
+      </template>
+      <h1>Sign up to meet vini</h1>
+      <p>this is vinicious jr</p> 
+    </Modal>
+  </teleport>
   <br><br><br><br>
   <button @click="toggleModal">ShowModal</button>
+  <button @click="toggleModal2">ShowModal2</button>
+
 
 </template>
 
@@ -18,9 +38,8 @@ export default {
   data() {
     return {
       title: 'My First VueJS app',
-      header: 'Vini is the best dribler',
-      text: 'grab your pizza just time!',
-      showModal: false
+      showModal: false,
+      showModal2: false 
     }
   },
   methods: {
@@ -31,13 +50,16 @@ export default {
     },
     toggleModal(){
       this.showModal = !this.showModal
+    },
+    toggleModal2(){
+      this.showModal2 = !this.showModal2
     }
   }
 }
 </script>
 
 <style>
-#app {
+#app, .modals {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -48,8 +70,8 @@ export default {
 h1{
   color: black;
 }
-button{
+/* button{
   position: fixed;
   bottom: 800px;
-} 
+} */
 </style>
